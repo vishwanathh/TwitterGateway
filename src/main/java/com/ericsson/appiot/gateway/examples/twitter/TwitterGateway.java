@@ -22,7 +22,7 @@ public class TwitterGateway {
 	}
 	
 	private void start() {
-		logger.log(Level.INFO, "Http Rest Gateway starting up.");
+		logger.log(Level.INFO, "Twitter Gateway starting up.");
 		DeviceManager deviceManager = new DeviceManager();
         deviceManager.registerSmartObject("/3341", TweetingAddressableTextDisplay.class);
         
@@ -31,12 +31,12 @@ public class TwitterGateway {
 		appIoTGateway = new AppIoTGateway(appIoTListener);
 		appIoTGateway.start();
 			
-		logger.log(Level.INFO, "Http Rest Gateway started. Type quit to shut down.");
+		logger.log(Level.INFO, "Twitter Gateway started. Type quit to shut down.");
 
 		Scanner scanner = new Scanner(System.in);
 		while(!scanner.nextLine().equalsIgnoreCase("quit")) {
 		}
 		scanner.close();
-		logger.log(Level.INFO, "Simple Gateway shut down.");
+		logger.log(Level.INFO, "Twitter Gateway shut down.");
 	}
 }
