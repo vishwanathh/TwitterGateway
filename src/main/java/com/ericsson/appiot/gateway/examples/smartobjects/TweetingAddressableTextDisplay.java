@@ -38,7 +38,7 @@ public class TweetingAddressableTextDisplay extends SmartObjectBase {
         init();
     }
 
-    private void init() {
+    public void init() {
         DeviceRegistration deviceRegistration = getDevice().getDeviceRegistration();
         if (deviceRegistration != null) {
             SettingCategory credentials = deviceRegistration.getSettingCategory(

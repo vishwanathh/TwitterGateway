@@ -2,6 +2,7 @@ package com.ericsson.appiot.gateway.examples.twitter;
 
 import com.ericsson.appiot.gateway.AppIoTGateway;
 import com.ericsson.appiot.gateway.AppIoTListener;
+import com.ericsson.appiot.gateway.GatewayException;
 import com.ericsson.appiot.gateway.device.DeviceAppIoTListener;
 import com.ericsson.appiot.gateway.device.DeviceManager;
 import com.ericsson.appiot.gateway.examples.smartobjects.TweetingAddressableTextDisplay;
@@ -23,16 +24,22 @@ public class TwitterGateway {
 	
 	private void start() {
 		logger.log(Level.INFO, "Twitter Gateway starting up.");
-		DeviceManager deviceManager = new DeviceManager();
-        deviceManager.registerSmartObject("/3341", TweetingAddressableTextDisplay.class);
-        
-		appIoTListener = new DeviceAppIoTListener(deviceManager);
-        
-		appIoTGateway = new AppIoTGateway(appIoTListener);
-		appIoTGateway.start();
-			
-		logger.log(Level.INFO, "Twitter Gateway started. Type quit to shut down.");
-
+		DeviceManager deviceManager;
+		try {
+			deviceManager = new DeviceManager();
+	        deviceManager.registerSmartObject("/3341", TweetingAddressableTextDisplay.class);
+	        
+			appIoTListener = new DeviceAppIoTListener(deviceManager);
+	        
+			appIoTGateway = new AppIoTGateway(appIoTListener);
+			appIoTGateway.start();
+				
+			logger.log(Level.INFO, "Twitter Gateway started. Type quit to shut down.");
+		} catch (GatewayException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 		Scanner scanner = new Scanner(System.in);
 		while(!scanner.nextLine().equalsIgnoreCase("quit")) {
 		}
